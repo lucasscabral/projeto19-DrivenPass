@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import * as autenticacaoService from "../services/autenticacaoService";
+import { IUsuario, ILogin } from "../utils/interfaceUtils";
 
 
 export async function cadastrar(req: Request, res: Response) {
@@ -19,12 +20,12 @@ export async function cadastrar(req: Request, res: Response) {
 
 export async function logar(req: Request, res: Response) {
     const { email, password } = req.body;
-    const SECRET = process.env.JWT_SECRET;
+    const emailUsuario: ILogin = await autenticacaoService.verificaEmailLogin(email)
+    await autenticacaoService.verificaSenha(password, emailUsuario.password)
+    const corpo = { id: emailUsuario.id, email }
+    const token = await autenticacaoService.geraToken(corpo)
 
-    const emailUsuario = await autenticacaoService.verificaEmailLogin(email)
-
-    // const senhaUsuario = await autenticacaoService.verificaSenha(password, emailUsuario)
-
+    res.status(200).send(token)
     // const isValidPssword = bcrypt.compareSync(password, validUser[0].password);
     // if (!isValidPssword) {
     //     return res.status(401).send('Invalid email or password.');

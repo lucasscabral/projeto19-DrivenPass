@@ -6,6 +6,6 @@ import validateSchema from "../utils/validateSchema";
 const autenticacaoRouters = Router()
 
 autenticacaoRouters.post("/signup", validateSchema(validaAutenticacao), autenticacaoController.cadastrar)
-autenticacaoRouters.post("/signin", validateSchema(validaAutenticacao))
+autenticacaoRouters.post("/signin", validateSchema(validaAutenticacao), autenticacaoController.logar)
 
 export default autenticacaoRouters
