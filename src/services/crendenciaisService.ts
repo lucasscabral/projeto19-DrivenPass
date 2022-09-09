@@ -47,3 +47,8 @@ export async function descriptografaSenhaCredencial(credencial: ICredenciais) {
     const credencialDescriptografada = { ...credencial, password_credential: cryptr.decrypt(credencial.password_credential) }
     return credencialDescriptografada
 }
+
+
+export async function deletaCredencialId(credencialId: number) {
+    await credenciaisRepository.deletaCredencialId(credencialId)
+}

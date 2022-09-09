@@ -32,3 +32,13 @@ export async function credencialPeloId(req: Request, res: Response) {
 
     res.status(200).send(credencial)
 }
+export async function deletaCredencial(req: Request, res: Response) {
+    const credencialId = Number(req.params.credencialId)
+
+    const { id: userId } = res.locals.corpoToken
+
+    await credenciaisService.checaCredencialId(userId, credencialId)
+
+    await credenciaisService.deletaCredencialId(credencialId)
+    res.sendStatus(200)
+}

@@ -22,3 +22,7 @@ export async function buscaTodasCredenciais() {
 export async function buscaCredencialId(credencialId: number) {
     return await prisma.credentials.findUnique({ where: { id: credencialId } })
 }
+
+export async function deletaCredencialId(credencialId: number) {
+    await prisma.credentials.delete({ where: { id: credencialId } })
+}
