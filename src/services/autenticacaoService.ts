@@ -41,7 +41,7 @@ export async function verificaSenha(senhaPassada: string, senhaEcriptografada: s
 }
 
 export async function geraToken(dados: Login) {
-    const SECRETJWT: string | any = (process.env.JWT_SECRET)?.toString()
+    const SECRETJWT: string = process.env.JWT_SECRET || ""
     const token = jwt.sign(dados, SECRETJWT, {
         expiresIn: 60 * 60 * 24,
     });
