@@ -1,11 +1,11 @@
 import Joi from "joi";
 
-const validaCredencial = Joi.object({
+const validaCorpoCredencial = Joi.object({
     titulo: Joi.string().required(),
     url: Joi.string().uri().required(),
     nome: Joi.string().required(),
-    sennha: Joi.string().min(5).required()
+    senha: Joi.string().min(5).required()
 })
 
-export default validaCredencial
+export default validaCorpoCredencial
 

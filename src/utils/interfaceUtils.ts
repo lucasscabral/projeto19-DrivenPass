@@ -10,4 +10,6 @@ export interface ILogin {
     password: string
 }
 
+
+
 export type Login = Omit<ILogin, "password">

@@ -16,14 +16,13 @@ export async function validarCredencial(req: Request, res: Response, next: NextF
         const decoded: string | JwtPayload = jwt.verify(token, SECRETJWT);
 
         corpoToken = decoded;
+        res.locals.corpoToken = corpoToken;
+
+        next();
     } catch (error) {
         res
             .status(401)
             .json({ auth: false, message: 'Failed to authenticate token.' });
         return;
     }
-    console.log(corpoToken)
-    res.locals.corpoToken = corpoToken;
-
-    next();
 }
