@@ -8,6 +8,6 @@ const credenciaisRouter = Router()
 
 credenciaisRouter.post("/credenciais", validateSchema(validaCorpoCredencial), validarCredencial, credenciaisController.criaCredencial)
 credenciaisRouter.get("/credenciais", credenciaisController.todasCredenciais)
-credenciaisRouter.get("/credenciais/:credencialId", validarCredencial)
+credenciaisRouter.get("/credenciais/:credencialId", validarCredencial, credenciaisController.credencialPeloId)
 
 export default credenciaisRouter

@@ -21,9 +21,14 @@ export async function todasCredenciais(_: Request, res: Response) {
     res.status(200).send(credenciais)
 }
 
-// export async function credencialPeloId(req: Request, res: Response) {
-//     const { id } = res.locals.corpoToken
+export async function credencialPeloId(req: Request, res: Response) {
+    const credencialId = Number(req.params.credencialId)
 
+    const { id: userId } = res.locals.corpoToken
 
+    const pegaCredencialId = await credenciaisService.checaCredencialId(userId, credencialId)
 
-// }
+    const credencial = await credenciaisService.descriptografaSenhaCredencial(pegaCredencialId)
+
+    res.status(200).send(credencial)
+}

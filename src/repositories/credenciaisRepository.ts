@@ -18,3 +18,7 @@ export async function insereCrendial(credencial: ICredenciaisData) {
 export async function buscaTodasCredenciais() {
     return prisma.credentials.findMany()
 }
+
+export async function buscaCredencialId(credencialId: number) {
+    return await prisma.credentials.findUnique({ where: { id: credencialId } })
+}

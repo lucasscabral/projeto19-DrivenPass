@@ -1,5 +1,5 @@
 import * as credenciaisRepository from "../repositories/credenciaisRepository";
-import { ICredenciaisData } from "../types/credenciaisTypes";
+import { ICredenciais, ICredenciaisData } from "../types/credenciaisTypes";
 import Cryptr from "cryptr";
 
 
@@ -27,9 +27,23 @@ export async function pegaCredenciais() {
     const cryptr = new Cryptr('myTotallySecretKey');
     const credenciais = await credenciaisRepository.buscaTodasCredenciais()
 
-    const credenciaisDescripty = credenciais.map((value) => {
+    const credencialDescriptografada = credenciais.map((value) => {
         let dados = { ...value, password_credential: cryptr.decrypt(value.password_credential) }
         return dados
     })
-    return credenciaisDescripty
+    return credencialDescriptografada
+}
+
+export async function checaCredencialId(userId: number, credencialId: number) {
+    const credencial = await credenciaisRepository.buscaCredencialId(credencialId)
+    if (credencial?.userId !== userId || !credencial) {
+        throw { code: "forbidden", message: "Essa credencial não pertence a esse usuário ou a credencial não existe" }
+    }
+    return credencial
+}
+
+export async function descriptografaSenhaCredencial(credencial: ICredenciais) {
+    const cryptr = new Cryptr('myTotallySecretKey');
+    const credencialDescriptografada = { ...credencial, password_credential: cryptr.decrypt(credencial.password_credential) }
+    return credencialDescriptografada
 }

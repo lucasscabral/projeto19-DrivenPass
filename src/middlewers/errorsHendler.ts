@@ -8,6 +8,9 @@ export default async function errorsHendler(error: any, req: Request, res: Respo
         if (error.code === "unauthorized") {
             return res.status(401).send(error.message)
         }
+        if (error.code === "forbidden") {
+            return res.status(401).send(error.message)
+        }
     } catch (error) {
         res.sendStatus(500)
     }
