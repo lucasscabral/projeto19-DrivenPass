@@ -13,9 +13,18 @@ export async function criaNota(req: Request, res: Response) {
 
 }
 
-export async function listaNotas(req: Request, res: Response) {
+export async function listaNotas(_: Request, res: Response) {
     const { id: userId } = res.locals.corpoToken
 
     const notasSeguras = await notasSegurasService.todasNotas(userId)
     res.status(200).send(notasSeguras)
+}
+
+export async function listaNotaPeloId(req: Request, res: Response) {
+    const { id: userId } = res.locals.corpoToken
+    const notaId = Number(req.params.notaId)
+
+    const notaSegura = await notasSegurasService.buscaNotaId(userId, notaId)
+    console.log(notaSegura)
+    res.status(200).send(notaSegura)
 }

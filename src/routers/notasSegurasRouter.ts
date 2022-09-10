@@ -9,6 +9,8 @@ const notasRouter = Router()
 
 notasRouter.post("/notas", validateSchema(validaCorpoNotas), validarToken, notasSegurasController.criaNota)
 notasRouter.get("/notas", validarToken, notasSegurasController.listaNotas)
+notasRouter.get("/notas/:notaId", validarToken, notasSegurasController.listaNotaPeloId)
+notasRouter.delete("/notas", validarToken, notasSegurasController.listaNotas)
 
 
 export default notasRouter

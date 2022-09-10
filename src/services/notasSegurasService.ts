@@ -17,3 +17,11 @@ export async function criaNota(notaData: ISecureData) {
 export async function todasNotas(userId: number) {
     return await notasSegurasRepository.buscarTodasNotas(userId)
 }
+
+export async function buscaNotaId(userId: number, notaId: number) {
+    const nota = await notasSegurasRepository.buscaNota(notaId)
+    if (nota?.userId !== userId || !nota) {
+        throw { code: "forbidden", message: "Essa nota não pertence a esse usuário ou a nota não existe" }
+    }
+    return nota
+}

@@ -19,3 +19,7 @@ export async function insereNota(notaData: ISecureData) {
 export async function buscarTodasNotas(userId: number) {
     return await prisma.secure_notes.findMany({ where: { userId } })
 }
+
+export async function buscaNota(notaId: number) {
+    return await prisma.secure_notes.findUnique({ where: { id: notaId } })
+}
