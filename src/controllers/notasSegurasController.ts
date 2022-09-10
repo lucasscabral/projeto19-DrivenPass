@@ -12,3 +12,10 @@ export async function criaNota(req: Request, res: Response) {
     res.sendStatus(201)
 
 }
+
+export async function listaNotas(req: Request, res: Response) {
+    const { id: userId } = res.locals.corpoToken
+
+    const notasSeguras = await notasSegurasService.todasNotas(userId)
+    res.status(200).send(notasSeguras)
+}

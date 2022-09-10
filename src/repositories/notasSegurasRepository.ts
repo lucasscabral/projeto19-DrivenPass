@@ -15,3 +15,7 @@ export async function buscaPeloTitulo(userId: number, tituloNota: string) {
 export async function insereNota(notaData: ISecureData) {
     await prisma.secure_notes.create({ data: notaData })
 }
+
+export async function buscarTodasNotas(userId: number) {
+    return await prisma.secure_notes.findMany({ where: { userId } })
+}

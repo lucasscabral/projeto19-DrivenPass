@@ -8,6 +8,7 @@ import validateSchema from "../utils/validateSchema";
 const notasRouter = Router()
 
 notasRouter.post("/notas", validateSchema(validaCorpoNotas), validarToken, notasSegurasController.criaNota)
+notasRouter.get("/notas", validarToken, notasSegurasController.listaNotas)
 
 
 export default notasRouter

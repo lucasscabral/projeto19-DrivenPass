@@ -13,3 +13,7 @@ export async function checaTituloNota(userId: number, titulo: string) {
 export async function criaNota(notaData: ISecureData) {
     await notasSegurasRepository.insereNota(notaData)
 }
+
+export async function todasNotas(userId: number) {
+    return await notasSegurasRepository.buscarTodasNotas(userId)
+}
