@@ -25,3 +25,7 @@ export async function buscaNotaId(userId: number, notaId: number) {
     }
     return nota
 }
+
+export async function deletaNota(notaId: number) {
+    await notasSegurasRepository.deletarNota(notaId)
+}

@@ -28,3 +28,17 @@ export async function listaNotaPeloId(req: Request, res: Response) {
     console.log(notaSegura)
     res.status(200).send(notaSegura)
 }
+export async function deletaNota(req: Request, res: Response) {
+    const { id: userId } = res.locals.corpoToken
+    const notaId = Number(req.params.notaId)
+    // try {
+    await notasSegurasService.buscaNotaId(userId, notaId)
+
+    await notasSegurasService.deletaNota(notaId)
+    res.sendStatus(200)
+    // } catch (error) {
+    //     console.log(error)
+    //     res.sendStatus(500)
+    // }
+
+}

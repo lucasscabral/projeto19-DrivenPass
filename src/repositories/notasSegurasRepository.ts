@@ -23,3 +23,7 @@ export async function buscarTodasNotas(userId: number) {
 export async function buscaNota(notaId: number) {
     return await prisma.secure_notes.findUnique({ where: { id: notaId } })
 }
+
+export async function deletarNota(notaId: number) {
+    await prisma.secure_notes.delete({ where: { id: notaId } })
+}
