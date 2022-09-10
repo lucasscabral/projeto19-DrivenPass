@@ -40,6 +40,7 @@ model Secure_notes {
 
 model Cards {
   id             Int       @id @default(autoincrement())
+  titleCard      String
   numberCard     String
   printedName    String
   cvc            String
