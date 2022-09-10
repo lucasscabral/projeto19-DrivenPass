@@ -8,5 +8,8 @@ import validateSchema from "../utils/validateSchema";
 const cartaoRouter = Router()
 
 cartaoRouter.post("/cartao", validateSchema(validaCorpoCartao), validarToken, cartaoController.criaCartao)
+cartaoRouter.get("/cartao", validarToken, cartaoController.listaCartoes)
+cartaoRouter.get("/cartao/:cartaoId", validarToken, cartaoController.listaCartaoPeloId)
+cartaoRouter.delete("/cartao/:cartaoId", validarToken, cartaoController.deletaCartao)
 
 export default cartaoRouter

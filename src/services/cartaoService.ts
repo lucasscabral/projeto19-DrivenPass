@@ -12,3 +12,19 @@ export async function checaTituloNota(userId: number, tituloCartao: string) {
 export async function criaCartao(dadosCartao: ICardData) {
     await cartaoRepository.insereCartao(dadosCartao)
 }
+
+export async function todosCartoes(userId: number) {
+    return await cartaoRepository.buscarTodosCartoes(userId)
+}
+
+export async function buscaCartaoId(userId: number, cartaoId: number) {
+    const cartao = await cartaoRepository.buscaCartao(cartaoId)
+    if (cartao?.userId !== userId || !cartao) {
+        throw { code: "forbidden", message: "Esse cartao não pertence a esse usuário ou a cartao não existe" }
+    }
+    return cartao
+}
+
+export async function deletaCartao(cartaoId: number) {
+    await cartaoRepository.deletarCartao(cartaoId)
+}

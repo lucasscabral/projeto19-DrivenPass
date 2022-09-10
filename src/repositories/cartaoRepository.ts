@@ -16,3 +16,15 @@ export async function buscaPeloTitulo(userId: number, tituloCartao: string) {
 export async function insereCartao(dadosCartao: ICardData) {
     await prisma.cards.create({ data: dadosCartao })
 }
+
+export async function buscarTodosCartoes(userId: number) {
+    return await prisma.cards.findMany({ where: { userId } })
+}
+
+export async function buscaCartao(cartaoId: number) {
+    return await prisma.cards.findUnique({ where: { id: cartaoId } })
+}
+
+export async function deletarCartao(cartaoId: number) {
+    await prisma.cards.delete({ where: { id: cartaoId } })
+}
