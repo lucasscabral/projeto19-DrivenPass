@@ -11,10 +11,13 @@ datasource db {
 }
 
 model Users {
-  id          Int           @id @default(autoincrement())
-  email       String        @unique
-  password    String
-  credentials Credentials[]
+  id           Int            @id @default(autoincrement())
+  email        String         @unique
+  password     String
+  credentials  Credentials[]
+  Secure_notes Secure_notes[]
+  Cards        Cards[]
+  Wifi         Wifi[]
 }
 
 model Credentials {
@@ -25,4 +28,40 @@ model Credentials {
   password_credential String
   credential          Users  @relation(fields: [userId], references: [id])
   userId              Int
+}
+
+model Secure_notes {
+  id          Int    @id @default(autoincrement())
+  noteTitle   String
+  notes       String
+  secure_note Users  @relation(fields: [userId], references: [id])
+  userId      Int
+}
+
+model Cards {
+  id             Int       @id @default(autoincrement())
+  numberCard     String
+  printedName    String
+  cvc            String
+  expirationDate String
+  password       String
+  isVirtual      Boolean
+  type           typesCard
+  card           Users     @relation(fields: [userId], references: [id])
+  userId         Int
+}
+
+model Wifi {
+  id        Int    @id @default(autoincrement())
+  wifiTitle String
+  wiifiName String
+  password  String
+  wifi      Users  @relation(fields: [userId], references: [id])
+  userId    Int
+}
+
+enum typesCard {
+  credito
+  debito
+  ambos
 }

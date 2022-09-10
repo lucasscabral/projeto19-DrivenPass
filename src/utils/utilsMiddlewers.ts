@@ -1,7 +1,7 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 
-export async function validarCredencial(req: Request, res: Response, next: NextFunction) {
+export async function validarToken(req: Request, res: Response, next: NextFunction) {
     const { authorization } = req.headers;
     const token = authorization?.replace('Bearer ', '');
 

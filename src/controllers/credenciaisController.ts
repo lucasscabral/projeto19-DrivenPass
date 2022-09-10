@@ -14,11 +14,6 @@ export async function criaCredencial(req: Request, res: Response) {
 
     res.sendStatus(201)
 }
-// try {
-// } catch (error) {
-//     console.log(error)
-//     res.sendStatus(500)
-// }
 
 export async function todasCredenciais(_: Request, res: Response) {
     const { id: userId } = res.locals.corpoToken
