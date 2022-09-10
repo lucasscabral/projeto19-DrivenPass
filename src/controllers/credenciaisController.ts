@@ -13,12 +13,20 @@ export async function criaCredencial(req: Request, res: Response) {
     await credenciaisService.criaCredencial({ titulo, url, name: nome, password_credential: senhaCriptografada, userId: id })
 
     res.sendStatus(201)
-
 }
+// try {
+// } catch (error) {
+//     console.log(error)
+//     res.sendStatus(500)
+// }
 
 export async function todasCredenciais(_: Request, res: Response) {
-    const credenciais = await credenciaisService.pegaCredenciais()
+    const { id: userId } = res.locals.corpoToken
+
+    const credenciais = await credenciaisService.pegaCredenciais(userId)
     res.status(200).send(credenciais)
+
+
 }
 
 export async function credencialPeloId(req: Request, res: Response) {

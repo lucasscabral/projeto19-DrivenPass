@@ -19,7 +19,7 @@ model Users {
 
 model Credentials {
   id                  Int    @id @default(autoincrement())
-  titulo              String @unique
+  titulo              String
   url                 String
   name                String
   password_credential String

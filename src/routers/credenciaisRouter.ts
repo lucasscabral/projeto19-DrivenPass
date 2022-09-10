@@ -7,7 +7,7 @@ import * as credenciaisController from "../controllers/credenciaisController"
 const credenciaisRouter = Router()
 
 credenciaisRouter.post("/credenciais", validateSchema(validaCorpoCredencial), validarCredencial, credenciaisController.criaCredencial)
-credenciaisRouter.get("/credenciais", credenciaisController.todasCredenciais)
+credenciaisRouter.get("/credenciais", validarCredencial, credenciaisController.todasCredenciais)
 credenciaisRouter.get("/credenciais/:credencialId", validarCredencial, credenciaisController.credencialPeloId)
 credenciaisRouter.delete("/credenciais/:credencialId", validarCredencial, credenciaisController.deletaCredencial)
 

@@ -1,13 +1,15 @@
 import prisma from "../database/prismaClient";
 import { ICredenciaisData } from "../types/credenciaisTypes";
 
-export async function buscarPorTitulo(titulo: string) {
-    const tituloEncontrado = await prisma.credentials.findUnique({
+export async function buscarPorTitulo(userId: number, titulo: string) {
+    const tituloEncontrado = await prisma.credentials.findMany({
         where: {
-            titulo
+            titulo,
+            AND: {
+                userId
+            }
         }
     })
-    console.log(tituloEncontrado)
     return tituloEncontrado
 }
 
@@ -15,8 +17,8 @@ export async function insereCrendial(credencial: ICredenciaisData) {
     await prisma.credentials.create({ data: credencial })
 }
 
-export async function buscaTodasCredenciais() {
-    return prisma.credentials.findMany()
+export async function buscaTodasCredenciais(userId: number) {
+    return prisma.credentials.findMany({ where: { userId } })
 }
 
 export async function buscaCredencialId(credencialId: number) {

@@ -6,6 +6,7 @@ import bcrypt, { compareSync } from "bcrypt"
 import { IUsuario, Login } from "../utils/interfaceUtils";
 
 export async function verificaEmailCadastro(email: string) {
+
     const emailEncontrado = await buscaPorEmail(email)
     if (emailEncontrado) {
         throw { code: "unauthorized", message: "Esse email já existe" }
@@ -25,10 +26,9 @@ export async function criarUsuario(data: IUsuario) {
 
 export async function verificaEmailLogin(email: string) {
     const emailEncontrado = await buscaPorEmail(email)
-    if (!emailEncontrado.email) {
+    if (!emailEncontrado) {
         throw { code: "unauthorized", message: "Email ou senha inválido" }
     }
-    console.log(emailEncontrado)
     return emailEncontrado
 }
 

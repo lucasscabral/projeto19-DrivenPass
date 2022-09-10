@@ -2,8 +2,8 @@ import prisma from "../database/prismaClient";
 import { IUsuario } from "../utils/interfaceUtils";
 
 export async function buscaPorEmail(email: string) {
-    const emailEncontrado = await prisma.users.findMany({ where: { email } })
-    return emailEncontrado[0]
+    const emailEncontrado = await prisma.users.findUnique({ where: { email } })
+    return emailEncontrado
 }
 
 export async function insereUsuario(dadosCadastrais: IUsuario) {
