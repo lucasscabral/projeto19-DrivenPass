@@ -3,7 +3,7 @@ import "express-async-errors"
 import cors from "cors"
 import dotenv from "dotenv"
 import router from "./routers"
-import errorsHendler from "../src/middlewers/errorsHendler"
+import errorsHendler from "./middlewers/errorsHendler"
 
 dotenv.config()
 
