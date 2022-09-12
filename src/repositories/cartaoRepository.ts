@@ -1,5 +1,5 @@
 import prisma from "../database/prismaClient"
-import { ICardData, ICards } from "../types/cartaoTypes"
+import { ICardData } from "../types/cartaoTypes"
 
 
 export async function buscaPeloTitulo(userId: number, tituloCartao: string) {

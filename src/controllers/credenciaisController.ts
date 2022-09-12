@@ -13,6 +13,8 @@ export async function criaCredencial(req: Request, res: Response) {
     await credenciaisService.criaCredencial({ titulo, url, name: nome, password_credential: senhaCriptografada, userId: id })
 
     res.sendStatus(201)
+
+
 }
 
 export async function todasCredenciais(_: Request, res: Response) {
@@ -20,8 +22,6 @@ export async function todasCredenciais(_: Request, res: Response) {
 
     const credenciais = await credenciaisService.pegaCredenciais(userId)
     res.status(200).send(credenciais)
-
-
 }
 
 export async function credencialPeloId(req: Request, res: Response) {

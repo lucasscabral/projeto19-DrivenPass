@@ -1,3 +1,5 @@
+import dotenv from "dotenv"
+dotenv.config()
 import * as credenciaisRepository from "../repositories/credenciaisRepository";
 import { ICredenciais, ICredenciaisData } from "../types/credenciaisTypes";
 import Cryptr from "cryptr";
@@ -11,7 +13,8 @@ export async function checaTitulo(id: number, titulo: string) {
 }
 
 export async function criptografaSenha(senha: string) {
-    const cryptr = new Cryptr('myTotallySecretKey');
+    const chaveSecreta = process.env.CRYPTR_SECRET
+    const cryptr = new Cryptr(`${chaveSecreta}`)
     const senhaCriptografada = cryptr.encrypt(senha)
 
     return senhaCriptografada
@@ -22,13 +25,14 @@ export async function criaCredencial(credencial: ICredenciaisData) {
 }
 
 export async function pegaCredenciais(userId: number) {
-    const cryptr = new Cryptr('myTotallySecretKey');
+    const chaveSecreta = process.env.CRYPTR_SECRET
+    const cryptr = new Cryptr(`${chaveSecreta}`)
     const credenciais = await credenciaisRepository.buscaTodasCredenciais(userId)
-
     const credencialDescriptografada = credenciais.map((value) => {
         let dados = { ...value, password_credential: cryptr.decrypt(value.password_credential) }
         return dados
     })
+
     return credencialDescriptografada
 }
 
@@ -41,7 +45,8 @@ export async function checaCredencialId(userId: number, credencialId: number) {
 }
 
 export async function descriptografaSenhaCredencial(credencial: ICredenciais) {
-    const cryptr = new Cryptr('myTotallySecretKey');
+    const chaveSecreta = process.env.CRYPTR_SECRET
+    const cryptr = new Cryptr(`${chaveSecreta}`)
     const credencialDescriptografada = { ...credencial, password_credential: cryptr.decrypt(credencial.password_credential) }
     return credencialDescriptografada
 }

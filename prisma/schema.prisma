@@ -55,7 +55,7 @@ model Cards {
 model Wifi {
   id        Int    @id @default(autoincrement())
   wifiTitle String
-  wiifiName String
+  wifiName  String
   password  String
   wifi      Users  @relation(fields: [userId], references: [id])
   userId    Int

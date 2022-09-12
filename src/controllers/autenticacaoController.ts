@@ -20,7 +20,6 @@ export async function cadastrar(req: Request, res: Response) {
 
 export async function logar(req: Request, res: Response) {
     const { email, password } = req.body;
-    console.log(email)
 
     const emailUsuario: ILogin = await autenticacaoService.verificaEmailLogin(email)
     await autenticacaoService.verificaSenha(password, emailUsuario.password)
